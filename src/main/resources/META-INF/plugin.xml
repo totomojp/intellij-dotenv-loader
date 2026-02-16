@@ -1,0 +1,26 @@
+<idea-plugin>
+    <id>com.github.dotenvloader</id>
+    <name>Dotenv Loader</name>
+    <vendor>dotenvloader</vendor>
+
+    <description><![CDATA[
+    Loads environment variables from .env files and injects them into
+    Run Configurations at execution time. Configure a project-level
+    .env file path in Settings > Tools > Dotenv Loader.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends optional="true" config-file="dotenv-loader-java.xml">com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <projectConfigurable
+            parentId="tools"
+            instance="com.github.dotenvloader.settings.DotEnvLoaderConfigurable"
+            id="com.github.dotenvloader.settings.DotEnvLoaderConfigurable"
+            displayName="Dotenv Loader"
+            nonDefaultProject="true"/>
+
+        <projectService
+            serviceImplementation="com.github.dotenvloader.settings.DotEnvLoaderSettings"/>
+    </extensions>
+</idea-plugin>
