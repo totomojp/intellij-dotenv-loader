@@ -23,9 +23,8 @@ class DotEnvLoaderConfigurable(private val project: Project) :
             }
             row("File path:") {
                 textFieldWithBrowseButton(
-                    "Select .env File",
-                    project,
-                    FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor()
+                    FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor().withTitle("Select .env File"),
+                    project
                 )
                     .bindText(::envFilePath)
                     .columns(COLUMNS_LARGE)
