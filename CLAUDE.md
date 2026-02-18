@@ -13,13 +13,13 @@ IntelliJ Platform plugin (Kotlin) that injects environment variables from `.env`
 ./gradlew build
 
 # Run unit tests (JUnit 4)
-./gradlew test           
+./gradlew test
 
 # Launch sandboxed IDE for manual testing
-./gradlew runIde         
+./gradlew runIde
 
 # Verify plugin compatibility
-./gradlew verifyPlugin   
+./gradlew verifyPlugin
 ```
 
 Requires JDK 21. Build config is driven by `gradle.properties` (platformVersion, sinceBuild/untilBuild, etc.). Uses IntelliJ Platform Gradle Plugin 2.x (`org.jetbrains.intellij.platform`).
