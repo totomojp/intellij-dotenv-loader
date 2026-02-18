@@ -16,6 +16,7 @@ kotlin {
 dependencies {
     intellijPlatform {
         val localPath = providers.gradleProperty("localPlatformPath").orNull
+            ?.takeIf { it.isNotBlank() && java.io.File(it).exists() }
         if (localPath != null) {
             local(localPath)
         } else {
