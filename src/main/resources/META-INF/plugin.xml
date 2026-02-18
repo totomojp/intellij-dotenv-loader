@@ -12,6 +12,12 @@
     <depends>com.intellij.modules.platform</depends>
     <depends optional="true" config-file="dotenv-loader-java.xml">com.intellij.modules.java</depends>
 
+    <projectListeners>
+        <listener
+            class="com.github.dotenvloader.execution.DotEnvExecutionListener"
+            topic="com.intellij.execution.ExecutionListener"/>
+    </projectListeners>
+
     <extensions defaultExtensionNs="com.intellij">
         <projectConfigurable
             parentId="tools"
