@@ -1,0 +1,7 @@
+.gradle/
+build/
+.idea/
+*.class
+
+# .env は機密情報を含むため除外（.env.example を参照）
+.env
