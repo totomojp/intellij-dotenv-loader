@@ -3,13 +3,15 @@ updates:
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     cooldown:
-      default: "7 days"
+      default-days: 7
+      semver-major-days: 30
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     cooldown:
-      default: "7 days"
+      default-days: 7
+      semver-major-days: 30
