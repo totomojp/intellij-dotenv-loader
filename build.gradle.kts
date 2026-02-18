@@ -1,3 +1,4 @@
+import java.io.File
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 
 plugins {
@@ -16,7 +17,7 @@ kotlin {
 dependencies {
     intellijPlatform {
         val localPath = providers.gradleProperty("localPlatformPath").orNull
-            ?.takeIf { it.isNotBlank() && java.io.File(it).exists() }
+            ?.takeIf { it.isNotBlank() && File(it).exists() }
         if (localPath != null) {
             local(localPath)
         } else {
