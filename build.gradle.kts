@@ -2,7 +2,7 @@ import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.9.25"
+    id("org.jetbrains.kotlin.jvm") version "2.1.10"
     id("org.jetbrains.intellij.platform")
 }
 
@@ -15,7 +15,12 @@ kotlin {
 
 dependencies {
     intellijPlatform {
-        intellijIdea(providers.gradleProperty("platformVersion"))
+        val localPath = providers.gradleProperty("localPlatformPath").orNull
+        if (localPath != null) {
+            local(localPath)
+        } else {
+            intellijIdea(providers.gradleProperty("platformVersion"))
+        }
         bundledPlugin("com.intellij.java")
 
         pluginVerifier()
