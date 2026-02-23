@@ -1,7 +1,7 @@
 <idea-plugin>
-    <id>com.github.dotenvloader</id>
+    <id>jp.totomo.dotenv-loader</id>
     <name>Dotenv Loader</name>
-    <vendor>dotenvloader</vendor>
+    <vendor url="https://totomo.jp">totomo</vendor>
 
     <description><![CDATA[
     Loads environment variables from .env files and injects them into
