@@ -13,7 +13,7 @@ class DotEnvExecutionListener(private val project: Project) : ExecutionListener 
 
     override fun processStartScheduled(executorId: String, env: ExecutionEnvironment) {
         val envVars = DotEnvLoader.load(project) ?: return
-        val runProfile = env.runProfile ?: return
+        val runProfile = env.runProfile
         val injector = injectors.firstOrNull { it.canInject(runProfile) } ?: return
         val restore = injector.inject(runProfile, envVars) ?: return
         restoreActions[System.identityHashCode(env)] = restore

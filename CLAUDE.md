@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-IntelliJ Platform plugin (Kotlin) that injects environment variables from `.env` files into Run Configurations at execution time. Targets IntelliJ IDEA 2024.2–2025.3 (unified IntelliJ IDEA target). Uses optional dependency on `com.intellij.modules.java` for `RunConfigurationExtension`; settings UI is platform-level (available on all JetBrains IDEs).
+IntelliJ Platform plugin (Kotlin) that injects environment variables from `.env` files into Run Configurations at execution time. Targets IntelliJ IDEA 2024.2–2026.1 (unified IntelliJ IDEA target). Uses optional dependency on `com.intellij.modules.java` for `RunConfigurationExtension`; settings UI is platform-level (available on all JetBrains IDEs).
 
 ## Build Commands
 
