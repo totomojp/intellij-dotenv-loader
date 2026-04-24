@@ -30,11 +30,14 @@ The plugin has three layers connected through `DotEnvLoaderSettings` (project se
 
 - **parser/** — `DotEnvParser` is a pure Kotlin utility (no IntelliJ dependencies) that parses `.env` files. Supports double/single quoted values, multiline, escape sequences, `export` prefix, inline comments. Independently testable.
 - **settings/** — `DotEnvLoaderSettings` (`SimplePersistentStateComponent<BaseState>`) stores `enabled` flag and `envFilePath` per project in `.idea/dotenv-loader.xml`. `DotEnvLoaderConfigurable` (`BoundConfigurable`) provides the Settings > Tools > Dotenv Loader UI.
-- **execution/** — `DotEnvRunConfigurationExtension` extends `RunConfigurationExtension`. Injects env vars in `patchCommandLine()` by merging parsed `.env` values into `GeneralCommandLine.environment`. Run Configuration's explicit vars take precedence over `.env` values (only sets if key not already present). Re-reads file on every execution (no caching).
+- **execution/** — Two injection mechanisms for different Run Configuration types:
+  - `DotEnvRunConfigurationExtension` (`RunConfigurationExtension`): For Java-based Run Configurations. Injects env vars in `patchCommandLine()` by merging `.env` values into `GeneralCommandLine.environment`. Run Configuration's explicit vars take precedence (only sets if key not already present). Re-reads file on every execution (no caching).
+  - `DotEnvExecutionListener` (`ExecutionListener`): For Gradle/Maven/Python/Go/Node.js. Injects in `processStartScheduled()` and restores in `processStarted()` / `processNotStarted()` / `processTerminated()`. Uses strategy pattern: `ExternalSystemInjector` (for ExternalSystem-based configs like Gradle/Maven) and `ReflectionInjector` (reflection-based for generic run profiles).
+  - `DotEnvLoader`: Shared utility for reading settings and parsing `.env` files.
 
 ## Plugin Descriptor Split
 
-`plugin.xml` registers platform-level extensions (settings UI, project service). `dotenv-loader-java.xml` registers the `runConfigurationExtension` and is loaded only when `com.intellij.modules.java` is available. This split enables installation on non-Java IDEs (settings work, but injection requires IDE-specific adapters added as future optional dependencies).
+`plugin.xml` registers platform-level extensions (settings UI, project service, `DotEnvExecutionListener`). `dotenv-loader-java.xml` registers `DotEnvRunConfigurationExtension` and is loaded only when `com.intellij.modules.java` is available. On non-Java IDEs, `DotEnvExecutionListener` handles Gradle/Maven and generic run profiles via the strategy pattern.
 
 ## Key Conventions
 

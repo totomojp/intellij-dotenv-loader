@@ -19,6 +19,10 @@ class DotEnvExecutionListener(private val project: Project) : ExecutionListener 
         restoreActions[System.identityHashCode(env)] = restore
     }
 
+    override fun processStarted(executorId: String, env: ExecutionEnvironment, handler: ProcessHandler) {
+        restore(env)
+    }
+
     override fun processNotStarted(executorId: String, env: ExecutionEnvironment) {
         restore(env)
     }
